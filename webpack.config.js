@@ -11,7 +11,7 @@ const isEnvProduction = env === 'production'
 
 const plugins = [
   new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(env)
+    'process.env.NODE_ENV': JSON.stringify(env)
   }),
 ]
 
@@ -19,13 +19,21 @@ if (isEnvProduction) {
   // remove source map data
   fs.unlink(path.join(__dirname, './public/dist/bundle.js.map'), (err) => {})
   // plugins.push(new MinifyPlugin())
+
+  // FIX: Force exit the server process on Node 22 when the bundle finishes emitting
+  plugins.push({
+    apply: (compiler) => {
+      compiler.plugin('done', (stats) => {
+        console.log("Webpack compilation complete. Force-exiting firecracker instance...");
+        setTimeout(() => process.exit(0), 100);
+      });
+    }
+  });
 } else {
   // plugins.push(new BundleAnalyzerPlugin())
-
 }
 
 module.exports = {
-
   devServer: {
     contentBase: path.join(__dirname, '/public'),
     publicPath: '/dist/',
@@ -53,9 +61,6 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
             'scss': 'vue-style-loader!css-loader!sass-loader',
             'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
             'i18n': '@kazupon/vue-i18n-loader'
@@ -63,7 +68,6 @@ module.exports = {
           esModule: true
         }
       },
-
 
       {
         test: /\.ts$/,
@@ -126,7 +130,6 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.js', '.vue'],
-
     alias: {
       '@': path.join(__dirname, '/src')
     }
@@ -135,7 +138,6 @@ module.exports = {
   externals: {
     'moment': 'moment',
     'underscore': '_'
-    // todo muse ui has bug
   },
 
   plugins: plugins
