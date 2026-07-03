@@ -64,6 +64,7 @@
     "typescript": "^2.7.1",
     "vue-loader": "^14.2.3",
     "vue-property-decorator": "^7.2.0",
+    "vue-template-compiler": "^2.5.13",
     "vuex-class": "^0.3.1",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^3.0.3",
