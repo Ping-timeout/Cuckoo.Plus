@@ -26,14 +26,14 @@
     "sha1": "^1.1.1",
     "textarea-caret": "^3.1.0",
     "underscore": "^1.9.1",
-    "vue": "^2.5.13",
+    "vue": "2.5.13",
     "vue-color": "^2.7.0",
     "vue-i18n": "^8.1.0",
     "vue-resource": "^1.5.1",
     "vue-router": "3.0.1",
     "vuex": "^3.0.1"
   },
-"devDependencies": {
+  "devDependencies": {
     "@types/chai": "4.1.6",
     "@types/crypto-js": "3.1.43",
     "@types/jquery": "3.3.31",
@@ -64,7 +64,7 @@
     "typescript": "^2.7.1",
     "vue-loader": "^14.2.3",
     "vue-property-decorator": "^7.2.0",
-    "vue-template-compiler": "^2.5.13",
+    "vue-template-compiler": "2.5.13",
     "vuex-class": "^0.3.1",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^3.0.3",
@@ -91,5 +91,10 @@
   "bugs": {
     "url": "https://github.com/NanaMorse/Cuckoo.Plus/issues"
   },
-  "homepage": "https://github.com/NanaMorse/Cuckoo.Plus#readme"
+  "homepage": "https://github.com/NanaMorse/Cuckoo.Plus#readme",
+  "overrides": {
+    "vue": "2.5.13",
+    "vue-template-compiler": "2.5.13",
+    "csstype": "2.6.14"
+  }
 }
